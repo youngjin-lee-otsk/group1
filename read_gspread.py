@@ -8,7 +8,7 @@ scope = [
 ]
 
 credentials = Credentials.from_service_account_file(
-    'C:/Users/2018136/Downloads/Python_S2/group1/butterfly-257608-926179e2b552.json',
+    'C:/py/chatBot/group1/butterfly-257608-926179e2b552.json',
     scopes=scope
 )
 
@@ -31,8 +31,8 @@ print('--------')
 """
 inputdata = input()
 for idx, asd in enumerate(gc2):
-    #print(asd)
-    if asd[1] == inputdata:
+    print('asd', asd)
+    if asd[0] == inputdata:
         for idx2, zxc in enumerate(gc2[idx]):
             if idx2 > 1 :
                 print (zxc)

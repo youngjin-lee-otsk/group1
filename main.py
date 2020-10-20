@@ -6,7 +6,7 @@ from pandas.io.json import json_normalize
 # with open(json_slack_path,'r') as json_file:
 #     slack_dict = json.load(json_file)
 # webhookUrl = "https://hooks.slack.com/services/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"
-slack_token = "xoxb-1438541073680-1411752179141-YhwYs4aqVD1Wmnh7xnv2bSYw"
+slack_token = "xoxb-1438541073680-1411752179141-d6eH4TXrId5nm48G8smuYqwh"
 
 
 ChannelName = "test"
@@ -37,7 +37,7 @@ print(f"""
 
 
 # 글 내용
-Text = "슬랙 봇 테스트"
+Text = "슬랙 봇 테스트1"
 
 # 채널 내 문구 조회 API 메소드: conversations.list
 URL = 'https://slack.com/api/conversations.history'
@@ -51,6 +51,7 @@ params = {
 
 # API 호출
 res = requests.get(URL, params = params)
+print(res.json())
 chat_data = json_normalize(res.json()['messages'])
 chat_data['text'] = chat_data['text'].apply(lambda x: x.replace("\xa0"," "))
 ts = chat_data.loc[chat_data['text'] == Text, 'ts'].to_list()[0]
