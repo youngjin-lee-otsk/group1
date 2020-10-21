@@ -29,18 +29,24 @@ print('--------')
 입력 : EMG_EDI
 출력 : 'KT:123', 'YJ:456', 'SM:789'
 """
+totalArray = []
+sumArray = []
 inputdata = input()
 for idx, asd in enumerate(gc2):
     print('asd', asd)
     if asd[0] == inputdata:
+        totalArray.append(asd[0])
         for idx2, zxc in enumerate(gc2[idx]):
             if idx2 > 1 :
                 print (zxc)
+                sumArray.append(zxc)
                 if zxc == "" :
                     break
         print("OK")
+        totalArray.append(sumArray)
     #print(asd[0])
     #print(asd[1])
     #print(asd[2])
     #print(asd[3])
     #print(asd[4])
+print(totalArray[1])
