@@ -1,3 +1,4 @@
+import os
 import json
 from flask import Flask, request, make_response
 from slacker import Slacker
@@ -8,11 +9,11 @@ import random
 import pyowm
 
 #슬렉 토큰 가져오기
-token = 'xoxb-1438541073680-1411752179141-X7geaTcVXJbOFgRPyydcZ0bQ'
+token = os.getenv('SLACK_TOKEN', 'nono')
 slack = Slacker(token)
 
 #pyowm 을 통해 날씨 정보 가져오자
-API_Key = '2738e08dc88598ebd27bf2355a1680eb'
+API_Key = os.getenv('OWM_API_KEY', 'nono1')
 owm = pyowm.OWM(API_Key)
  
 City_ID = 1835848
