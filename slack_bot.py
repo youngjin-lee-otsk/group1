@@ -7,6 +7,13 @@ from google.oauth2.service_account import Credentials
 import gspread
 import random
 import pyowm
+import requests
+import json
+
+#COVID-19
+URL = 'https://api.corona-19.kr/korea/?serviceKey=a992827a8f50aefac9bbce58ac6d8a35c'
+covid = requests.get(URL).json()
+#print(response)
 
 #슬렉 토큰 가져오기
 token = os.getenv('SLACK_TOKEN', 'nono')
@@ -15,6 +22,16 @@ slack = Slacker(token)
 #pyowm 을 통해 날씨 정보 가져오자
 API_Key = os.getenv('OWM_API_KEY', 'nono1')
 owm = pyowm.OWM(API_Key)
+
+c_comment = (str(covid['updateTime']) + '\n'
++ '국내 확진자수 ' + str(covid['TotalCase']) + '\n'
++ '국내 완치자수 ' + str(covid['TotalRecovered']) + '\n'
++ '국내 사망자수 ' + str(covid['TotalDeath']) + '\n'
++ '국내 격리자수 ' + str(covid['NowCase']) + '\n'
++ '오늘 하루 완치자수 ' + str(covid['TodayRecovered']) + '\n'
++ '오늘 하루 사망자수 ' + str(covid['TodayDeath']) + '\n'
++ '전날 대비 환자수 ' + str(covid['TotalCaseBefore']) + '\n'
+)
  
 City_ID = 1835848
 manager = owm.weather_manager()
@@ -91,6 +108,8 @@ def hears():
         finalValue = random.sample(totalArray[1], 1)
         if totalArray[0] == 'weather':
             return event_handler(event_type, slack_event, w_comment)
+        elif totalArray[0] == 'corona':
+            return event_handler(event_type, slack_event, c_comment)
         else:
             return event_handler(event_type, slack_event, finalValue)
     else:

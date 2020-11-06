@@ -8,7 +8,7 @@ scope = [
 ]
 
 credentials = Credentials.from_service_account_file(
-    'C:/py/chatBot/group1/butterfly-257608-926179e2b552.json',
+    'C:/python/group1/butterfly-257608-926179e2b552.json',
     scopes=scope
 )
 
